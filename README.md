@@ -1,5 +1,5 @@
 # What is the project about
-The project is a 3D Top View Game that recreates an RPG table with a procedural map development.
+The project is a 2D Top View Game that recreates an RPG table with a procedural map development.
 
 
 # How am I able to see the project progress?
