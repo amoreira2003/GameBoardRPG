@@ -30,11 +30,11 @@ private float targetOrtho;
 void Update() {
 
         if(Input.GetKey(KeyCode.Q)) {
-            turnAround(Vector2.zero,Camera.main.gameObject,Mathf.MoveTowards(0, RotationIndex, smoothRotationSpeed * Time.deltaTime));
+            turnAround(Camera.main.transform.position,Camera.main.gameObject,Mathf.MoveTowards(0, RotationIndex, smoothRotationSpeed * Time.deltaTime));
         }
 
          if(Input.GetKey(KeyCode.E)) {
-            turnAround(Vector2.zero,Camera.main.gameObject,Mathf.MoveTowards(0, -RotationIndex, smoothRotationSpeed * Time.deltaTime));
+            turnAround(Camera.main.transform.position,Camera.main.gameObject,Mathf.MoveTowards(0, -RotationIndex, smoothRotationSpeed * Time.deltaTime));
         }
 
 
@@ -50,7 +50,8 @@ void Update() {
  void LateUpdate()
  {
 
-
+    if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows))) {
+    
      if(Input.GetMouseButtonDown(0))
      {
          Origin = MousePos();
@@ -64,6 +65,7 @@ void Update() {
      {
          transform.position = ResetCamera;
      }
+    }
  }
  // return the position of the mouse in world coordinates (helper method)
     Vector3 MousePos()
