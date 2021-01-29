@@ -16,7 +16,7 @@ You are also able to send money to support us keep working and creating new feat
 
 If you have no artistic skills and, no money you can also help by submitting your code here on GitHub.
 
-Any contributions you make are greatly appreciated.
+Any contributions you make are greatly appreciated. (`Made in Unity based in C#`)
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/feature`)
