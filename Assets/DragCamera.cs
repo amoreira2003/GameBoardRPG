@@ -6,6 +6,8 @@ public class DragCamera : MonoBehaviour
 {
 
 
+ public GameObject ObjectUsingCamera;
+ ObjectableScript objectScript;
  private Vector3 ResetCamera; // original camera position
  private Vector3 Origin; // place where mouse is first pressed
  private Vector3 Diference; // change in position of mouse relative to origin
@@ -23,12 +25,13 @@ private float targetOrtho;
 
  void Start()
  {
+     objectScript = ObjectUsingCamera.GetComponent<ObjectableScript>();
      ResetCamera = Camera.main.transform.position;
      targetOrtho = Camera.main.orthographicSize;
  }
 
 void Update() {
-
+        if(!objectScript.isDragging()) {
         if(Input.GetKey(KeyCode.Q)) {
             turnAround(Camera.main.transform.position,Camera.main.gameObject,Mathf.MoveTowards(0, RotationIndex, smoothRotationSpeed * Time.deltaTime));
         }
@@ -37,20 +40,22 @@ void Update() {
             turnAround(Camera.main.transform.position,Camera.main.gameObject,Mathf.MoveTowards(0, -RotationIndex, smoothRotationSpeed * Time.deltaTime));
         }
 
-
+        
          float scroll = Input.GetAxis ("Mouse ScrollWheel");
          if (scroll != 0.0f) {
              targetOrtho -= scroll * zoomSpeed;
              targetOrtho = Mathf.Clamp (targetOrtho, minimumOrthographicSize, maximumOrthographicSize);
+             
          }
 
          Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, targetOrtho, smoothSpeed * Time.deltaTime);
+         }
             
 }
  void LateUpdate()
  {
 
-    if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows))) {
+    if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows) || objectScript.isDragging())) {
     
      if(Input.GetMouseButtonDown(0))
      {

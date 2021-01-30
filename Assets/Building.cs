@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Building : MonoBehaviour
 {
+    public GameObject draggingObject;
 
-
-
+    ObjectableScript objectableScript;
     public TileBase block;
     // Start is called before the first frame update
     Tilemap tilemap;
@@ -15,17 +15,14 @@ public class Building : MonoBehaviour
     public GameObject selector;
     void Start()
     {
+        objectableScript = draggingObject.GetComponent<ObjectableScript>();
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows)) {
-            
-            
-
-        
+        if(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows) && !objectableScript.isDragging()) {
         if(Input.GetMouseButton(0)) {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3Int tile = tilemap.WorldToCell(pos);
