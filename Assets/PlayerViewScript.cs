@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerViewScript : MonoBehaviour
 {
-    bool isEditing = false;
+    public GameObject EditorSwitch;
+    public bool isBoolEditing = false;
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.Confined;
+
     }
 
-    public void onStopEditing() {
-        
+    public bool isEditing() {
+        return isBoolEditing;
     }
 
     // Update is called once per frame

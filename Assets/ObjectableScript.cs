@@ -19,10 +19,13 @@ public class ObjectableScript : MonoBehaviour
     public float ScaleIndex = 0.1f;
     public float ScaleIndexBase = 0.1f;
     public bool dragging;
+
+    PlayerViewScript playerViewScript;
     private float distance;
     void Start()
     {
         dragging = false;
+        playerViewScript = Camera.main.GetComponent<PlayerViewScript>();
     }
 
     public void turnAround (Vector2 point, GameObject obj, float angle)
@@ -50,11 +53,10 @@ public class ObjectableScript : MonoBehaviour
  
     void Update()
     {
-        if (dragging) {
+        if (dragging && !playerViewScript.isEditing()) {
 
         float scroll = Input.GetAxis ("Mouse ScrollWheel");
         if (scroll != 0.0f) {
-
         if(Input.GetKey(KeyCode.LeftControl)) {
         if(scroll > 0.0f) {
             ScaleIndex = ScaleIndexBase;
