@@ -17,7 +17,6 @@ public class Building : MonoBehaviour
     public GameObject selector;
     void Start()
     {
-        objectableScript = draggingObject.GetComponent<ObjectableScript>();
         tilemap = GameObject.Find("Tilemap").GetComponent<Tilemap>();
         playerViewScript = Camera.main.GetComponent<PlayerViewScript>();
     }
@@ -25,7 +24,7 @@ public class Building : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows)) && !objectableScript.isDragging() 
+        if((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows)) && !playerViewScript.isDragging() 
         && playerViewScript.isEditing()) {
         if(Input.GetMouseButton(0)) {
         Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);

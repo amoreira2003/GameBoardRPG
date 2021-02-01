@@ -124,11 +124,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoothRotationSpeed: 300
   MaximumSize: 20
-  MinimumSize: 1
+  MinimumSize: 0.1
   ScrollIndexBase: 10
   ScaleIndex: 0.1
   ScaleIndexBase: 0.1
-  dragging: 0
+  draggingLocal: 0
 --- !u!114 &1266284134928923292
 MonoBehaviour:
   m_ObjectHideFlags: 0

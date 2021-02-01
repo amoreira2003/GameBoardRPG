@@ -16,6 +16,7 @@ public class EditorSwitchScript : MonoBehaviour
     public void switchEditing() {
         if(isEditing) {
            isEditing = false;
+           GameObject.Find("ObjectCreatorBackground").GetComponent<ObjectBuilder>().disableVisibility();
         } else {
           isEditing = true;
     }

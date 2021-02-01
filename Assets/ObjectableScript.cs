@@ -18,42 +18,41 @@ public class ObjectableScript : MonoBehaviour
 
     public float ScaleIndex = 0.1f;
     public float ScaleIndexBase = 0.1f;
-    public bool dragging;
+    
+
+    public bool draggingLocal = false;
 
     PlayerViewScript playerViewScript;
     private float distance;
     void Start()
     {
-        dragging = false;
         playerViewScript = Camera.main.GetComponent<PlayerViewScript>();
     }
 
     public void turnAround (Vector2 point, GameObject obj, float angle)
  {
      Vector3 point3 = new Vector3(point.x,point.y,0);
-     Vector3 axis = new Vector3 (0,0,1);
+     Vector3 axis = new Vector3 (point.x/2,point.y/2,1);
      obj.transform.RotateAround(point3,axis,angle);
  }
 
 
-    public bool isDragging() {
-        return dragging;
-    }
-
         void OnMouseDown()
     {
         distance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        dragging = true;
+        playerViewScript.dragging = true;
+        draggingLocal = true;
     }
  
     void OnMouseUp()
     {
-        dragging = false;
+        playerViewScript.dragging = false;
+        draggingLocal = false;
     }
  
     void Update()
     {
-        if (dragging && !playerViewScript.isEditing()) {
+        if (draggingLocal && !playerViewScript.isEditing()) {
 
         float scroll = Input.GetAxis ("Mouse ScrollWheel");
         if (scroll != 0.0f) {
@@ -77,7 +76,7 @@ public class ObjectableScript : MonoBehaviour
         } else if(scroll < 0.0f) {
             ScrollIndex = ScrollIndexBase;
         }
-            turnAround(gameObject.transform.position,gameObject,Mathf.MoveTowards(0, ScrollIndex, smoothRotationSpeed * Time.deltaTime));
+            turnAround(Vector2.zero,gameObject,Mathf.MoveTowards(0, ScrollIndex, smoothRotationSpeed * Time.deltaTime));
         }
 
         }

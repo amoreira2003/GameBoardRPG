@@ -6,8 +6,7 @@ public class DragCamera : MonoBehaviour
 {
 
 
- public GameObject ObjectUsingCamera;
- ObjectableScript objectScript;
+ PlayerViewScript playerView;
  private Vector3 ResetCamera; // original camera position
  private Vector3 Origin; // place where mouse is first pressed
  private Vector3 Diference; // change in position of mouse relative to origin
@@ -25,13 +24,13 @@ private float targetOrtho;
 
  void Start()
  {
-     objectScript = ObjectUsingCamera.GetComponent<ObjectableScript>();
+     playerView = Camera.main.GetComponent<PlayerViewScript>();
      ResetCamera = Camera.main.transform.position;
      targetOrtho = Camera.main.orthographicSize;
  }
 
 void Update() {
-        if(!objectScript.isDragging()) {
+        if(!playerView.isDragging()) {
         if(Input.GetKey(KeyCode.Q)) {
             turnAround(Camera.main.transform.position,Camera.main.gameObject,Mathf.MoveTowards(0, RotationIndex, smoothRotationSpeed * Time.deltaTime));
         }
@@ -55,7 +54,7 @@ void Update() {
  void LateUpdate()
  {
 
-    if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows) || objectScript.isDragging())) {
+    if(!(Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightWindows) || playerView.isDragging())) {
     
      if(Input.GetMouseButtonDown(0))
      {
